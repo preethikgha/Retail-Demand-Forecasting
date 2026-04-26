@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+data/sales_train_evaluation.csv
+data/calendar.csv
+data/sell_prices.csv
+.DS_Store

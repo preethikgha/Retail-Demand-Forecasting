@@ -7,14 +7,13 @@ import os
 OUT_DIR = "outputs/plots"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# Load cleaned series
 df = pd.read_csv("data/ts_ca1_foods.csv", index_col="date", parse_dates=True)
 df = df.asfreq("D").fillna(method="ffill")
 
 # STL Decomposition — period=7 for weekly seasonality
 result = seasonal_decompose(df["sales"], model="additive", period=7)
 
-# Plot
+
 fig = plt.figure(figsize=(14, 10))
 gs  = gridspec.GridSpec(4, 1, hspace=0.5)
 
@@ -44,7 +43,6 @@ plt.suptitle("STL Decomposition — CA_1 FOODS Daily Sales", fontsize=13, y=1.01
 plt.savefig(f"{OUT_DIR}/decomposition.png", dpi=150, bbox_inches="tight")
 plt.show()
 
-# Print summary stats
 print("Trend range   :", round(result.trend.min()), "to", round(result.trend.max()))
 print("Seasonal range:", round(result.seasonal.min()), "to", round(result.seasonal.max()))
 print("Residual std  :", round(result.resid.std(), 2))

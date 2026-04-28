@@ -12,7 +12,7 @@ os.makedirs(OUT_DIR, exist_ok=True)
 df = pd.read_csv(f"{DATA_DIR}/ts_ca1_foods.csv", index_col="date", parse_dates=True)
 df = df.asfreq("D").fillna(method="ffill")
 
-# Prophet needs columns named ds and y
+
 prophet_df = df.reset_index().rename(columns={"date": "ds", "sales": "y"})
 
 # Train/test split — last 90 days
@@ -49,11 +49,11 @@ print(f"  MAE  : {round(mae, 2)}")
 print(f"  RMSE : {round(rmse, 2)}")
 print(f"  MAPE : {round(mape, 2)}%")
 
-# Save metrics and predictions
+
 pd.DataFrame([{"model": "Prophet", "MAE": mae, "RMSE": rmse, "MAPE": mape}]).to_csv(f"{DATA_DIR}/prophet_metrics.csv", index=False)
 pd.DataFrame({"actual": actual, "predicted": pred}, index=test["ds"].values).to_csv(f"{DATA_DIR}/prophet_predictions.csv")
 
-# Plot
+
 plt.figure(figsize=(14, 5))
 plt.plot(test["ds"].values, actual, color="black", label="Actual", linewidth=1)
 plt.plot(test["ds"].values, pred, color="seagreen", label="Prophet Forecast", linewidth=1.2, linestyle="--")

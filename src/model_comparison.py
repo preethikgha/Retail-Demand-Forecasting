@@ -7,7 +7,7 @@ DATA_DIR = "data"
 OUT_DIR  = "outputs/plots"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-# Load all metrics
+
 arima   = pd.read_csv(f"{DATA_DIR}/arima_metrics.csv")
 prophet = pd.read_csv(f"{DATA_DIR}/prophet_metrics.csv")
 xgb     = pd.read_csv(f"{DATA_DIR}/xgboost_metrics.csv")

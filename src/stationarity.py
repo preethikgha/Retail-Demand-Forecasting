@@ -23,10 +23,8 @@ def run_adf(series, label):
         print("  Result         : NON-STATIONARY (p >= 0.05)")
     return result[1]
 
-# Test raw series
 p_raw = run_adf(df["sales"], "Raw Sales")
 
-# If non-stationary, apply first differencing
 df["sales_diff"] = df["sales"].diff()
 p_diff = run_adf(df["sales_diff"], "First Differenced Sales")
 

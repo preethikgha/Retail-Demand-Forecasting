@@ -28,7 +28,7 @@ df = df.dropna()
 features = ["lag_1", "lag_7", "lag_14", "lag_28", "rolling_7", "rolling_28", "dayofweek", "month", "dayofmonth"]
 target   = "sales"
 
-# Train/test split — last 90 days
+# Train/test split 
 train = df.iloc[:-90]
 test  = df.iloc[-90:]
 
@@ -38,7 +38,7 @@ X_test,  y_test  = test[features],  test[target]
 print(f"Train size : {len(train)}")
 print(f"Test size  : {len(test)}")
 
-# Fit XGBoost
+#  XGBoost
 print("\nFitting XGBoost model...")
 model = XGBRegressor(
     n_estimators=500,
@@ -63,7 +63,7 @@ print(f"  MAE  : {round(mae, 2)}")
 print(f"  RMSE : {round(rmse, 2)}")
 print(f"  MAPE : {round(mape, 2)}%")
 
-# Save
+
 pd.DataFrame([{"model": "XGBoost", "MAE": mae, "RMSE": rmse, "MAPE": mape}]).to_csv(f"{DATA_DIR}/xgboost_metrics.csv", index=False)
 pd.DataFrame({"actual": y_test.values, "predicted": pred}, index=test.index).to_csv(f"{DATA_DIR}/xgboost_predictions.csv")
 

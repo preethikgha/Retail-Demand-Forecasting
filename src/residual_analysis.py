@@ -27,7 +27,7 @@ if (lb["lb_pvalue"] > 0.05).all():
 else:
     print("Result : Residuals have autocorrelation — model missed some pattern")
 
-# Plots
+
 fig, axes = plt.subplots(2, 2, figsize=(14, 8))
 
 # Residuals over time
